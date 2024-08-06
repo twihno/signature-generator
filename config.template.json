@@ -1,0 +1,31 @@
+{
+  "languages": [
+    "de",
+    "en"
+  ],
+  "pronouns": true,
+  "organisations": {
+    "org1": {
+      "name": "Organisation 1",
+      "domains": [
+        "org1.org"
+      ],
+      "roles": [
+        "org1"
+      ],
+      "enforce_access": true,
+      "positions": [
+        {
+          "de": {
+            "neutral": "Position 1"
+          },
+          "en": {
+            "neutral": "Position 1"
+          }
+        }
+      ],
+      "html": true,
+      "txt": true
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.wrapper-header {
+  padding: 0.5rem;
+  text-align: center;
+  width: min(100%, 140ch);
+  display: inline-block;
+}
+
+.header {
+  display: inline-block;
+  padding: 0.5rem;
+  height: 3rem;
+
+  background: var(--background-panel-1);
+  border: var(--border-panel-1);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 1.5rem;
+}
+
+.page-title {
+  margin: 0 0 0 1rem;
+  font-size: 1.25rem;
+}
