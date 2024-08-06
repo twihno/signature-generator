@@ -1,5 +1,5 @@
 .wrapper-header {
-  padding: 0.5rem;
+  padding: 1rem;
   text-align: center;
   width: min(100%, 140ch);
   display: inline-block;
@@ -16,6 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
   border-radius: 1.5rem;
 }
 

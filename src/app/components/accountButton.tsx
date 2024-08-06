@@ -14,7 +14,7 @@ export function AccountButton(props: {
   if (props.logged_in) {
     return (
       <div className={styles["wrapper"]}>
-        <span>{props.name}</span>
+        <span className={styles["user"]}>{props.name}</span>
         <button
           title="Logout"
           className={styles["button"]}

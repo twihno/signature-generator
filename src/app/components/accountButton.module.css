@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  overflow: hidden;
 }
 
 .button {
@@ -14,4 +15,10 @@
   border: var(--border-input);
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
+}
+
+.user {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
