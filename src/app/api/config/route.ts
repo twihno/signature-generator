@@ -1,9 +1,14 @@
-import { ClientConfig, getServerConfig, getTemplates } from "@/util/config";
+import {
+  ClientConfig,
+  ClientOrg,
+  getServerConfig,
+  getTemplates,
+} from "@/util/config";
 
-import { NextRequest, NextResponse } from "next/server";
-import { getToken, JWT } from "next-auth/jwt";
-import { getFilteredPronouns, PRONOUNS } from "@/util/pronouns";
 import { ProfileRoles } from "@/util/auth";
+import { getFilteredPronouns } from "@/util/pronouns";
+import { getToken, JWT } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
 
 async function handler(req: NextRequest) {
   // @ts-ignore
@@ -21,30 +26,34 @@ async function handler(req: NextRequest) {
 
   const clientConfig: ClientConfig = {
     languages: serverConfig.languages,
-    pronouns: serverConfig.pronouns ? await getFilteredPronouns() : null,
-    organisations: {},
+    pronouns: serverConfig.pronouns ? await getFilteredPronouns() : undefined,
+    organizations: {},
   };
 
-  for (const [orgId, org] of Object.entries(serverConfig.organisations)) {
+  for (const [orgId, org] of Object.entries(serverConfig.organizations)) {
     let orgTemplates = templates[orgId];
     if (!orgTemplates) {
       throw new Error(`no matching template for org ${orgId}`);
     }
 
-    const clientOrg = {
+    const clientOrg: ClientOrg = {
+      templates: orgTemplates,
       name: org.name,
       positions: org.positions,
-      templates: orgTemplates,
+      maxPositions: org.maxPositions,
+      templateFields: org.templateFields,
+      genderRequired: org.genderRequired,
+      address: org.address,
     };
 
     if (!org.enforce_access) {
-      clientConfig.organisations[orgId] = clientOrg;
+      clientConfig.organizations[orgId] = clientOrg;
       continue;
     }
 
     if (org.domains !== undefined && domain !== undefined) {
       if (org.domains.includes(domain)) {
-        clientConfig.organisations[orgId] = clientOrg;
+        clientConfig.organizations[orgId] = clientOrg;
         continue;
       }
     }
@@ -55,7 +64,7 @@ async function handler(req: NextRequest) {
           org.roles?.includes(role);
         }).length >= 1
       ) {
-        clientConfig.organisations[orgId] = clientOrg;
+        clientConfig.organizations[orgId] = clientOrg;
       }
     }
   }

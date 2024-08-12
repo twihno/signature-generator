@@ -1,12 +1,12 @@
 {
-  "languages": [
-    "de",
-    "en"
-  ],
+  "languages": {
+    "de": "Deutsch",
+    "en": "English"
+  },
   "pronouns": true,
-  "organisations": {
+  "organizations": {
     "org1": {
-      "name": "Organisation 1",
+      "name": "Organization 1",
       "domains": [
         "org1.org"
       ],
@@ -24,6 +24,7 @@
           }
         }
       ],
+      "maxPositions": 2,
       "html": true,
       "txt": true
     }

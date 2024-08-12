@@ -1,8 +1,8 @@
 .wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min-content;
   align-items: center;
-  gap: 1rem;
-  overflow: hidden;
+  gap: 0.75rem;
 }
 
 .button {

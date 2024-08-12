@@ -1,16 +1,16 @@
 import { getServerConfig } from "@/util/config";
 
-export type PronounList = {
+type PronounList = {
   parts: number;
   subject: string[];
   object: string[];
 };
 
-export type LocalisedPronounList = {
+type LocalizedPronounList = {
   [lang: string]: PronounList;
 };
 
-export const PRONOUNS: LocalisedPronounList = {
+const PRONOUNS: LocalizedPronounList = {
   en: {
     parts: 2,
     subject: ["he", "she", "they"],
@@ -19,7 +19,7 @@ export const PRONOUNS: LocalisedPronounList = {
   de: {
     parts: 2,
     subject: ["er", "sie", "es"],
-    object: ["ihn", "sie", "es"],
+    object: ["ihm", "ihr", "sein"],
   },
   fr: {
     parts: 2,
@@ -28,27 +28,63 @@ export const PRONOUNS: LocalisedPronounList = {
   },
 };
 
-let filteredPronouons: LocalisedPronounList | undefined = undefined;
+export type GeneratedPronounList = {
+  [lang: string]: string[];
+};
 
-export async function getFilteredPronouns(): Promise<LocalisedPronounList> {
+export const GENERATED_PRONOUNS = (() => {
+  let list: GeneratedPronounList = {};
+  for (const lang in PRONOUNS) {
+    list[lang] = getPronounStringOptions(PRONOUNS, lang);
+  }
+  return list;
+})();
+
+let filteredPronouons: GeneratedPronounList | undefined = undefined;
+
+export async function getFilteredPronouns(): Promise<GeneratedPronounList> {
   if (filteredPronouons !== undefined) {
     return filteredPronouons;
   }
 
-  let tmpFilteredPronouns: LocalisedPronounList = {};
+  let tmpFilteredPronouns: GeneratedPronounList = {};
 
   const serverConfig = await getServerConfig();
 
-  for (const lang of serverConfig.languages) {
-    if (PRONOUNS[lang] !== undefined) {
-      tmpFilteredPronouns[lang] = PRONOUNS[lang];
+  for (const lang in serverConfig.languages) {
+    if (GENERATED_PRONOUNS[lang] !== undefined) {
+      tmpFilteredPronouns[lang] = GENERATED_PRONOUNS[lang];
     } else {
       throw new Error(
-        `pronouns for language "${lang}" not implemented. Please deactivate this function or create a pull request`,
+        `pronouns for language "${lang}" not implemented. Please deactivate this function or create a pull request`
       );
     }
   }
 
   filteredPronouons = tmpFilteredPronouns;
   return tmpFilteredPronouns;
+}
+
+function getPronounStringOptions(
+  pronouns: LocalizedPronounList,
+  language: string
+): string[] {
+  const localPronouns = pronouns[language];
+  if (localPronouns === undefined) {
+    throw Error("unknown language");
+  }
+
+  if (localPronouns.parts !== 2) {
+    return localPronouns.subject;
+  }
+
+  let pronounList: string[] = [];
+
+  for (const subject of localPronouns.subject) {
+    for (const object of localPronouns.object) {
+      pronounList.push(`${subject}/${object}`);
+    }
+  }
+
+  return pronounList;
 }

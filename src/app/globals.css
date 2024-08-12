@@ -20,8 +20,8 @@
 
 :root {
   --color-font: hsl(0, 0%, 3%);
-  --background: hsl(0, 0%, 95%);
-  --background-panel-1: hsl(0, 0%, 98%);
+  --background: hsl(0, 0%, 97%);
+  --background-panel-1: hsl(0, 0%, 100%);
   --background-input: hsl(0, 0%, 96%);
   --border-input: 1px solid hsl(0, 0%, 80%);
   --border-panel-1: 1px solid hsl(0, 0%, 80%);
