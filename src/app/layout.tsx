@@ -1,6 +1,9 @@
 import { PageHeader } from "@/app/components/pageHeader";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { getServerConfig } from "../util/config";
 import "./globals.css";
+import styles from "./layout.module.css";
 
 export const metadata: Metadata = {
   title: "Signature Generator",
@@ -12,11 +15,28 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const serverConfig = await getServerConfig();
+  const footerLinks = [];
+  for (const [name, link] of Object.entries(serverConfig.footer.links)) {
+    footerLinks.push(
+      <Link rel="noreferrer noopener" key={name} href={link}>
+        {name}
+      </Link>
+    );
+  }
   return (
     <html lang="en">
       <body>
-        <PageHeader />
-        <main>{children}</main>
+        <div className={styles["wrapper-top"]}>
+          <PageHeader />
+          <main>{children}</main>
+        </div>
+        <footer className={styles["footer"]}>
+          <div className={styles["footer-links"]}>{footerLinks}</div>
+          <div className={styles["copyright"]}>
+            {serverConfig.footer.copyright}
+          </div>
+        </footer>
       </body>
     </html>
   );

@@ -1,0 +1,32 @@
+.wrapper-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  gap: 1rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.footer-links a {
+  color: var(--color-font);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.copyright {
+  text-align: center;
+}

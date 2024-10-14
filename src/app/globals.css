@@ -20,20 +20,34 @@
 
 :root {
   --color-font: hsl(0, 0%, 3%);
+  --color-font-danger: hsl(0, 100%, 38%);
+  --color-font-active: hsl(200, 100%, 38%);
   --background: hsl(0, 0%, 97%);
   --background-panel-1: hsl(0, 0%, 100%);
   --background-input: hsl(0, 0%, 96%);
+  --background-input-danger: hsl(0, 53%, 89%);
+  --background-input-active: hsl(200, 53%, 89%);
   --border-input: 1px solid hsl(0, 0%, 80%);
+  --border-input-danger: 1px solid hsl(0, 100%, 38%);
+  --border-input-active: 1px solid hsl(200, 100%, 38%);
   --border-panel-1: 1px solid hsl(0, 0%, 80%);
+  --shadow-1: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 }
 
 @media only screen and (prefers-color-scheme: dark) {
   :root {
     --color-font: hsl(0, 0%, 98%);
+    --color-font-danger: hsl(0, 100%, 87%);
+    --color-font-active: hsl(200, 100%, 87%);
     --background: hsl(0, 0%, 10%);
     --background-panel-1: hsl(0, 0%, 15%);
     --background-input: hsl(0, 0%, 23%);
+    --background-input-danger: hsl(0, 53%, 30%);
+    --background-input-active: hsl(200, 53%, 30%);
     --border-input: 1px solid hsl(0, 0%, 28%);
+    --border-input-danger: 1px solid hsl(0, 50%, 67%);
+    --border-input-active: 1px solid hsl(200, 50%, 67%);
     --border-panel-1: 1px solid hsl(0, 0%, 25%);
   }
 }
@@ -46,10 +60,16 @@ body {
 
 body {
   background: var(--background);
-  text-align: center;
   color: var(--color-font);
 }
 
 button {
   cursor: pointer;
+}
+
+main {
+  padding: 0 1rem;
+  height: 1fr;
+  width: min(100%, 140ch);
+  height: 100%;
 }

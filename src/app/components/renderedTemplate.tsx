@@ -1,6 +1,7 @@
 import DOMPurify from "dompurify";
 import { useId, useState } from "react";
 import { GrammaticalGender, Position } from "../../util/config";
+import styles from "./renderedTemplate.module.css";
 
 export type TemplateConfig = {
   name?: string;
@@ -21,7 +22,7 @@ export function HtmlTemplate(props: {
 }) {
   const id = useId();
   return (
-    <div>
+    <div className={styles["wrapper"]}>
       <div
         id={id}
         dangerouslySetInnerHTML={{
@@ -37,6 +38,8 @@ export function HtmlTemplate(props: {
         }}
       ></div>
       <CopyButton
+        className={styles["action-button"]}
+        classNameActive={styles["action-button-active"]}
         onClick={() => {
           const signature = document.getElementById(id)?.outerHTML || "";
           console.log(signature);
@@ -67,9 +70,11 @@ export function TextTemplate(props: {
   );
 
   return (
-    <div>
+    <div className={styles["wrapper"]}>
       <textarea value={signature} disabled />
       <CopyButton
+        className={styles["action-button"]}
+        classNameActive={styles["action-button-active"]}
         onClick={() => {
           navigator.clipboard.writeText(signature);
         }}
@@ -78,22 +83,32 @@ export function TextTemplate(props: {
   );
 }
 
-export function CopyButton(props: { onClick: () => void }) {
+export function CopyButton(props: {
+  className: string;
+  classNameActive: string;
+  onClick: () => void;
+}) {
   const [timeoutHandle, setTimeoutHandle] = useState<
     NodeJS.Timeout | undefined
   >(undefined);
   const [label, setLabel] = useState<string>("Copy");
+  const [classNameConcat, setClassNameConcat] = useState<string>(
+    props.className
+  );
 
   return (
     <button
+      className={classNameConcat}
       onClick={() => {
         if (timeoutHandle) {
           clearTimeout(timeoutHandle);
         }
         setLabel("Copied");
+        setClassNameConcat([props.className, props.classNameActive].join(" "));
         setTimeoutHandle(
           setTimeout(() => {
             setLabel("Copy");
+            setClassNameConcat(props.className);
           }, 1000)
         );
 

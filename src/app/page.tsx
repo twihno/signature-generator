@@ -7,6 +7,6 @@ export default async function Home() {
   if (session !== null) {
     return <Configurator />;
   } else {
-    return <div>EINLOGGEN!!!!</div>;
+    return <div></div>;
   }
 }

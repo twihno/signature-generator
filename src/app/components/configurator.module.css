@@ -1,13 +1,31 @@
 .wrapper {
   text-align: left;
   width: min(100%, 140ch);
-  padding: 0rem 3rem;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: max-content;
+  gap: 1rem 2rem;
+}
+
+@media only screen and (max-width: 950px) {
+  .wrapper {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.wrapper-loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .loader {
-  width: 48px;
-  height: 48px;
-  border: 5px solid var(--color-font);
+  width: 4rem;
+  height: 4rem;
+  border: 6px solid var(--color-font);
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
@@ -22,4 +40,91 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.input-wrapper {
+  /* TODO */
+  margin-bottom: 0.75rem;
+}
+
+.label-big {
+  margin-bottom: 0.25rem;
+  display: inline-block;
+}
+
+.input-line {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.input {
+  width: 100%;
+  min-height: 2.5rem;
+  background: var(--background-input);
+  border: var(--border-input);
+  border-radius: 0.25rem;
+  padding: 0 1rem;
+  resize: vertical;
+  font-size: 0.875rem;
+}
+
+textarea.input {
+  height: 6.875rem;
+  padding: 0.8125rem 1rem;
+}
+
+.reset {
+  height: 2.5rem;
+  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--background-input);
+  border: var(--border-input);
+  border-radius: 0.25rem;
+}
+
+.wrapper-config {
+  background: var(--background-panel-1);
+  border-radius: 1.5rem;
+  border: var(--border-panel-1);
+  box-shadow: var(--shadow-1);
+  padding: 2rem 3rem;
+}
+
+.wrapper-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-button {
+  height: 2.5rem;
+  width: 2.5rem;
+  flex: none;
+  background: var(--background-input-danger);
+  border: var(--border-input-danger);
+  border-radius: 0.25rem;
+}
+
+.fullwidth-button {
+  width: 100%;
+  min-height: 2.5rem;
+  background: var(--background-input);
+  border: var(--border-input);
+  border-radius: 0.25rem;
+  padding: 0 1rem;
+}
+
+.checkbox-line {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-line input[type="checkbox"] {
+  margin-left: 0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }

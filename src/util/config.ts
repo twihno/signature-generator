@@ -33,6 +33,7 @@ export type RawServerConfig = {
       txt: boolean;
     };
   };
+  footer: { links: { [displayName: string]: string }; copyright: string };
 };
 
 export type ValidOrg = {
@@ -55,6 +56,7 @@ export type ServerConfig = {
   languages: LanguageConfig;
   pronouns: boolean;
   organizations: ValidOrg;
+  footer: { links: { [displayName: string]: string }; copyright: string };
 };
 
 export type Position = {
@@ -130,6 +132,7 @@ function prepareConfig(rawConfig: RawServerConfig): ServerConfig {
     pronouns: rawConfig.pronouns,
     languages: rawConfig.languages,
     organizations: {},
+    footer: rawConfig.footer,
   };
 
   // Fix stuff for every org

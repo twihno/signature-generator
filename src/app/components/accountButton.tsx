@@ -27,6 +27,7 @@ export function AccountButton(props: {
   }
   return (
     <div className={styles["wrapper"]}>
+      <span></span>
       <button
         title="Sign in"
         className={styles["button"]}

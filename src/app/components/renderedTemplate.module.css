@@ -1,0 +1,39 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) min-content;
+  background: var(--background-panel-1);
+  border-radius: 1.5rem;
+  border: var(--border-panel-1);
+  box-shadow: var(--shadow-1);
+  padding: 3.625rem 3rem 2rem 3rem;
+}
+
+.wrapper textarea {
+  width: 100%;
+  height: 100%;
+  vertical-align: center;
+  background: none;
+  border: none;
+  resize: none;
+}
+
+.action-button {
+  width: 100%;
+  min-height: 2.5rem;
+  background: var(--background-input);
+  border: var(--border-input);
+  border-radius: 0.25rem;
+  padding: 0 1rem;
+  resize: vertical;
+  font-size: 0.875rem;
+}
+
+.action-button-active {
+  background: var(--background-input-active);
+  border: var(--border-input-active);
+  color: var(--color-font-active);
+}

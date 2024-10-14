@@ -15,6 +15,7 @@
   border: var(--border-input);
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
+  width: max-content;
 }
 
 .user {
